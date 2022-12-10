@@ -21,9 +21,20 @@ function printCarsFromLSAfterReload() {
 }
 
 function searchACarForBrand(arrayReceived, desiredBrand) {
-    arrayResult = arrayReceived.filter(function(i){
+    let arrayResult = arrayReceived.filter(function(i){
         if (i.brand === desiredBrand) {
             return i;
+        }
+    })
+    console.log(arrayResult);
+    return arrayResult;
+}
+
+function searchBrandsOfCars(arrayReceived) {
+    let arrayResult = [];
+    arrayReceived.forEach(function(i){
+        if (!arrayResult.includes(i.brand)) {
+            arrayResult.push(i.brand);
         }
     })
     console.log(arrayResult);
