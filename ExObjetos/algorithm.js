@@ -12,12 +12,22 @@ function addCarAndSaveLS() {
         gear: document.getElementById("gear").value
     }
     cars.push(car);
-    localStorage.setItem('cars', JSON.stringify(cars));
+    window.localStorage.setItem('cars', JSON.stringify(cars));
 }
 
 function printCarsFromLSAfterReload() {
     cars = JSON.parse(localStorage.getItem('cars'));
     console.log(cars);
+}
+
+function searchACarForBrand(arrayReceived, desiredBrand) {
+    arrayResult = arrayReceived.filter(function(i){
+        if (i.brand === desiredBrand) {
+            return i;
+        }
+    })
+    console.log(arrayResult);
+    return arrayResult;
 }
 
 theForm.addEventListener('submit', addCarAndSaveLS);
