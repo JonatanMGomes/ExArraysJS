@@ -1,8 +1,8 @@
 const theForm = document.getElementById("theForm");
 
-var cars = [];
-
 function addCarAndSaveLS() {
+    let cars = JSON.parse(localStorage.getItem('cars')) ?? []; 
+
     let car = {
         brand: document.getElementById("brand").value,
         model: document.getElementById("model").value,
@@ -16,11 +16,11 @@ function addCarAndSaveLS() {
 }
 
 function printCarsFromLSAfterReload() {
-    cars = JSON.parse(localStorage.getItem('cars'));
+    let cars = JSON.parse(localStorage.getItem('cars'));
     console.log(cars);
 }
 
-function searchACarForBrand(arrayReceived, desiredBrand) {
+function searchCarsByBrand(arrayReceived, desiredBrand) {
     let arrayResult = arrayReceived.filter(function(i){
         if (i.brand === desiredBrand) {
             return i;
@@ -39,6 +39,23 @@ function searchBrandsOfCars(arrayReceived) {
     })
     console.log(arrayResult);
     return arrayResult;
+}
+
+function customSearch(cars, arrayOfPropDesired) {
+    let customList = []
+
+    for (let index = 0; index < cars.length; index++) {
+        let currentCar = cars[index];
+        let customCar = [] 
+
+        for (let i = 0; i < arrayOfPropDesired.length; i++) {
+            let prop = arrayOfPropDesired[i];
+            customCar.push(currentCar[prop])
+        }
+        
+        customList.push(customCar)
+    }
+    return customList;
 }
 
 theForm.addEventListener('submit', addCarAndSaveLS);
